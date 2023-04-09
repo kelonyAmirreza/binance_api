@@ -1,0 +1,6 @@
+.env
+binance-test-prv.pem
+binance-test-pub.pem
+
+# env pachages
+venv_binance_api
