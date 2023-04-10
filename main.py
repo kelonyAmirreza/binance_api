@@ -13,9 +13,15 @@ client: Client
 def main():
     # Load Private key and API key and Create client
     init()
-    print(client.account())
+    print(client.account(), end='\n\n')
 
-    # placeTrade(symbol='btcusdt', quantity=0.001, price=28300)
+    success = placeTrade(symbol='btcusdt', quantity=0.001,
+                         price=28400, side='SELL')
+    if success:
+        print("Order submitted!\n\n")
+
+    print(client.get_open_orders(None))
+    # client.cancel_open_orders('BTCUSDT')
 
 
 def placeTrade(symbol: str, quantity: float, price: float, side: str = 'BUY', type: str = 'LIMIT', timeInForce: str = 'GTC', **kwargs) -> bool:
@@ -47,12 +53,19 @@ def placeTrade(symbol: str, quantity: float, price: float, side: str = 'BUY', ty
                 MARKET and LIMIT order types default to FULL, all other orders default to ACK.
         recvWindow (int, optional): The value cannot be greater than 60000
     """
-    check_parameters(
-        [[symbol, "symbol"], [side, "side"], [type, "type"]])
+    try:
+        check_parameters(
+            [[symbol, "symbol"], [side, "side"], [type, "type"]])
 
-    symbol = symbol.upper()
-    client.new_order(symbol=symbol, quantity=quantity,
-                     price=price, side=side, type=type, timeInForce=timeInForce, **kwargs)
+        symbol = symbol.upper()
+        client.new_order(symbol=symbol, quantity=quantity,
+                         price=price, side=side, type=type, timeInForce=timeInForce, **kwargs)
+
+        print(
+            f'{type} order submited for {symbol} pair.\nFor: {quantity}\nat price: {price}')
+        return True
+    except:
+        return False
 
 
 def init():
