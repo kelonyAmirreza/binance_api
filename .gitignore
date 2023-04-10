@@ -4,3 +4,4 @@ binance-test-pub.pem
 
 # env pachages
 venv_binance_api
+__pycache__
