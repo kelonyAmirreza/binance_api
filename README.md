@@ -8,15 +8,15 @@ To create an RSA key for the Spot Test Network on Binance using OpenSSL, follow 
 
 3. Enter the following command to create a private key:
 
-   `openssl genpkey -algorithm RSA -out private_key.pem -aes256`
+   `openssl genrsa -out binance-test-prv.pem 2048`
 
-   This will generate a private key with AES-256 encryption and save it in a file named `private_key.pem`.
+   This will generate a private key with AES-256 encryption and save it in a file named `binance-test-prv.pem`.
 
 4. Enter the following command to extract the public key from the private key:
 
-   `openssl rsa -pubout -in private_key.pem -out public_key.pem`
+   `openssl rsa -in binance-test-prv.pem -pubout -outform PEM -out binance-test-pub.pem`
 
-   This extracts the public key from the private key and saves it in a file named `public_key.pem`.
+   This extracts the public key from the private key and saves it in a file named `binance-test-pub.pem`.
 
 5. Your RSA key pair is now created and can be used for the Spot Test Network on Binance. You should keep the private key secret and secure, while sharing the public key with others as necessary.
 
